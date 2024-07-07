@@ -4,6 +4,11 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Corrected: Define a route directly on the app
+app.get('/', (req, res) => {
+  res.send('User route');
+});
+
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,3 +32,6 @@ app.use('/api/thoughts', thoughtRoutes);
 
 // Start the server
 app.listen(PORT, () => console.log(`🌍 Server running on http://localhost:${PORT}`));
+
+// Remove the incorrect export as it's not defined in the provided code snippet
+// module.exports = router;
