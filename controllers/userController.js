@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const User = require('../models/user'); // Corrected to uppercase 'User'
 
 const userController = {
   // Get all users
@@ -63,7 +63,72 @@ const userController = {
     } catch (err) {
       res.status(500).json(err);
     }
+  },
+
+  // Method to register a user
+  registerUser: async (req, res) => {
+    try {
+      // Assuming registration logic involves creating a new user
+      const newUser = await User.create(req.body);
+      res.json(newUser);
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  },
+
+  // Method to login a user
+  loginUser: async (req, res) => {
+    try {
+      // Assuming login logic involves finding a user by credentials
+      // This is a placeholder logic. Implement actual authentication logic as needed.
+      const user = await User.findOne({ email: req.body.email });
+      if (!user) {
+        res.status(404).json({ message: 'User not found' });
+        return;
+      }
+      // Further authentication logic to compare passwords, etc.
+      res.json({ message: 'User logged in successfully' });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+  // Add a friend to a user
+  addFriend: async (req, res) => {
+    try {
+      const user = await User.findByIdAndUpdate(
+        req.params.userId,
+        { $addToSet: { friends: req.params.friendId } },
+        { new: true }
+      );
+      if (!user) {
+        res.status(404).json({ message: 'No user found with this id!' });
+        return;
+      }
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+
+// Delete a friend from a user
+deleteFriend: async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.params.userId,
+      { $pull: { friends: req.params.friendId } },
+      { new: true }
+    );
+    if (!user) {
+      res.status(404).json({ message: 'No user found with this id!' });
+      return;
+    }
+    res.json(user);
+  } catch (err) {
+    res.status(500).json(err);
   }
+}
 };
 
 module.exports = userController;
