@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const reactionController = require('../controllers/reactionController');
 
-// Assuming there's a controller file with functions to handle requests
 const { getAllThoughts, getThoughtById, createThought, updateThought, deleteThought } = require('../controllers/thoughtController');
 
 // Fetch all thoughts
@@ -18,5 +18,8 @@ router.put('/:id', updateThought);
 
 // Delete a thought by ID
 router.delete('/:id', deleteThought);
+
+// Corrected route to add a reaction to a thought
+router.post('/:thoughtId/reactions', reactionController.addReaction);
 
 module.exports = router;
