@@ -62,7 +62,8 @@ const thoughtController = {
         res.status(404).json({ message: 'No thought found with this id!' });
         return;
       }
-      // Also remove the thought from the user's thoughts array
+
+      //remove the thought from the user's thoughts array
       await User.findByIdAndUpdate(
         thoughtToDelete.userId,
         { $pull: { thoughts: req.params.id } },

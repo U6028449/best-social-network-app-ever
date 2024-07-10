@@ -35,6 +35,17 @@ const reactionController = {
     } catch (err) {
       res.status(400).json(err);
     }
+  },
+
+  // Add a method to get all reactions
+  getAllReactions: async (req, res) => {
+    try {
+      const thoughts = await Thought.find({}).select('reactions');
+      const allReactions = thoughts.map(thought => thought.reactions).flat();
+      res.json(allReactions);
+    } catch (err) {
+      res.status(500).json(err);
+    }
   }
 };
 

@@ -1,11 +1,11 @@
 // Import models
-const Reaction = require('./reaction');
 const Thought = require('./thought');
-const User = require('./user'); // Corrected the casing of the file name
+const User = require('./user'); 
+const {Reaction} = require('./reaction');
 
 // Export models
 module.exports = {
-  Reaction,
   Thought,
   User,
+  Reaction
 };

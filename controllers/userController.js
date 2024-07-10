@@ -1,4 +1,4 @@
-const User = require('../models/user'); // Corrected to uppercase 'User'
+const User = require('../models/user'); // Import the User model
 
 const userController = {
   // Get all users
@@ -57,8 +57,6 @@ const userController = {
         res.status(404).json({ message: 'No user found with this id!' });
         return;
       }
-      // BONUS: Remove the user's associated thoughts
-      // You would add the logic here to also delete the user's thoughts
       res.json({ message: 'User successfully deleted' });
     } catch (err) {
       res.status(500).json(err);
@@ -68,7 +66,6 @@ const userController = {
   // Method to register a user
   registerUser: async (req, res) => {
     try {
-      // Assuming registration logic involves creating a new user
       const newUser = await User.create(req.body);
       res.json(newUser);
     } catch (err) {
@@ -79,14 +76,11 @@ const userController = {
   // Method to login a user
   loginUser: async (req, res) => {
     try {
-      // Assuming login logic involves finding a user by credentials
-      // This is a placeholder logic. Implement actual authentication logic as needed.
       const user = await User.findOne({ email: req.body.email });
       if (!user) {
         res.status(404).json({ message: 'User not found' });
         return;
       }
-      // Further authentication logic to compare passwords, etc.
       res.json({ message: 'User logged in successfully' });
     } catch (err) {
       res.status(500).json(err);

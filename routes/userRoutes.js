@@ -2,10 +2,6 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 
-// Middleware for validating request body, if needed
-
-
-
 // Routes for user operations
 router.post('/register',  userController.registerUser);
 router.post('/login',  userController.loginUser);

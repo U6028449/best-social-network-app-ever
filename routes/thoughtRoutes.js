@@ -7,6 +7,9 @@ const { getAllThoughts, getThoughtById, createThought, updateThought, deleteThou
 // Fetch all thoughts
 router.get('/', getAllThoughts);
 
+// Route to get all reactions - Moved up to prevent conflict
+router.get('/reactions/all', reactionController.getAllReactions);
+
 // Fetch a single thought by ID
 router.get('/:id', getThoughtById);
 
@@ -19,10 +22,10 @@ router.put('/:id', updateThought);
 // Delete a thought by ID
 router.delete('/:id', deleteThought);
 
-// route to add a reaction to a thought
+// Route to add a reaction to a thought
 router.post('/:thoughtId/reactions', reactionController.addReaction);
 
-// route to remove a reaction from a thought
+// Route to remove a reaction from a thought
 router.delete('/:thoughtId/reactions/:reactionId', reactionController.removeReaction);
 
 module.exports = router;
