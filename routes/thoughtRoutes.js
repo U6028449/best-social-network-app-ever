@@ -19,7 +19,10 @@ router.put('/:id', updateThought);
 // Delete a thought by ID
 router.delete('/:id', deleteThought);
 
-// Corrected route to add a reaction to a thought
+// route to add a reaction to a thought
 router.post('/:thoughtId/reactions', reactionController.addReaction);
+
+// route to remove a reaction from a thought
+router.delete('/:thoughtId/reactions/:reactionId', reactionController.removeReaction);
 
 module.exports = router;
